@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <div class="container">
   <h2>Vertical (basic) form</h2>
   <form action="{{route('data')}}" method="POST">
