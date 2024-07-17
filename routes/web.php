@@ -129,3 +129,20 @@ Route::get('login', function () {
 Route::post('data', function () {
     return 'data inserted successeful';
 })->name('data');
+
+//task3:
+Route::get('task3', function () {
+    return view('task3');
+
+});
+
+// Route::post('task3data', function () {
+//     return 'task 3 data inserted successeful';
+// })->name('task3data');
+
+Route::post('task3data', function (Request $request) {
+    $name = $request->input('name');
+    $email = $request->input('email');
+
+    return view('task3data', compact('name', 'email'));
+})->name('task3data');
