@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClassController;
 
 Route::get('', function () {
     return view('welcome');
@@ -146,3 +149,20 @@ Route::post('task3data', function (Request $request) {
 
     return view('task3data', compact('name', 'email'));
 })->name('task3data');
+
+//session 4
+//schema
+// to create new db table commands:
+// php artisan make:migration create_cars_table
+// php artisan migrate
+
+//php artisan list => to view all commands
+
+
+
+Route::get('cars/create', [CarController::class, 'create']);
+Route::Post('cars', [CarController::class, 'store'])->name('cars.store');
+
+//classes task4
+Route::get('classes/create', [CarController::class, 'create']);
+Route::Post('classes', [CarController::class, 'store'])->name('classes.store');
