@@ -29,7 +29,25 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Class Title:</label>
             <div class="col-md-10">
-              <input name="carTitle" type="text" placeholder="BMW" class="form-control py-2" />
+              <input name="className" type="text" placeholder="BMW" class="form-control py-2" />
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Capacity:</label>
+            <div class="col-md-10">
+              <input name="capacity" type="text" placeholder="BMW" class="form-control py-2" />
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Time From:</label>
+            <div class="col-md-10">
+              <input name="timeFrom" type="text" placeholder="BMW" class="form-control py-2" />
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Time To:</label>
+            <div class="col-md-10">
+              <input name="timeTo" type="text" placeholder="BMW" class="form-control py-2" />
             </div>
           </div>
           <div class="form-group mb-3 row">
