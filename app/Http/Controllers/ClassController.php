@@ -12,7 +12,9 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes = Classes::get();
+
+        return view('classes', compact('classes'));
     }
 
     /**
@@ -28,23 +30,42 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        $className = 'BMW';
-        $capacity = 40;
-        $isFulled = true;
-        $price = 12;
-        $timeFrom = 1;
-        $timeTo = 1;
+
+        if (isset($request->isFulled)) {
+            $isfull = true;
+        } else {
+            $isfull = false;
+        }
+
+        $data = [
+            'className' => $request->className,
+            'capacity' => $request->capacity,
+            'price' => $request->price,
+            'isFulled' => $isfull,
+            'timeFrom' => $request->timeFrom,
+            'timeTo' => $request->timeTo,
+        ];
+
+        Classes::create($data);
+        return "Done";
+
+        // $className = 'BMW';
+        // $capacity = 40;
+        // $isFulled = true;
+        // $price = 12;
+        // $timeFrom = 1;
+        // $timeTo = 1;
         
 
-        car::create([
-            'className' => $className,
-            'capacity' => 40,
-            'isFulled' => $isFulled,
-            'price' => 12,
-            'timeFrom' => 1,
-            'timeTo' => 2,
-        ]);
-        return "Done";
+        // car::create([
+        //     'className' => $className,
+        //     'capacity' => 40,
+        //     'isFulled' => $isFulled,
+        //     'price' => 12,
+        //     'timeFrom' => 1,
+        //     'timeTo' => 2,
+        // ]);
+        // return "Done";
     }
 
     /**
@@ -60,7 +81,8 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $class = Classesr::findOrFail($id);
+        return view('edit_class', compact('class'));
     }
 
     /**

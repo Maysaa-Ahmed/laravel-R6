@@ -12,7 +12,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car::get();
+
+        return view('cars', compact('cars'));
     }
 
     /**
@@ -20,9 +22,7 @@ class CarController extends Controller
      */
     public function create()
     {
-      
-    return view('add_car');
-
+        return view('add_car');
     }
 
     /**
@@ -30,17 +30,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $carTitle = 'BMW';
-        $description = 'test';
-        $price = 12;
-        $published = true;
+        if (isset($request->published)) {
+            $pub = true;
+        } else {
+            $pub = false;
+        }
 
-        car::create([
-            'carTitle' => $carTitle,
-            'description' => $description,
-            'price' => 12,
-            'published' => $published,
-        ]);
+        $data = [
+            'carTitle' => $request->carTitle,
+            'description' => $request->description,
+            'price' => $request->price,
+            'published' => $pub,
+        ];
+
+        Car::create($data);
         return "Done";
     }
 
@@ -57,7 +60,8 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        return view('edit_car', compact('car'));
     }
 
     /**
@@ -76,3 +80,4 @@ class CarController extends Controller
         //
     }
 }
+

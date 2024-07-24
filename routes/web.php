@@ -166,3 +166,11 @@ Route::Post('cars', [CarController::class, 'store'])->name('cars.store');
 //classes task4
 Route::get('classes/create', [CarController::class, 'create']);
 Route::Post('classes', [CarController::class, 'store'])->name('classes.store');
+
+//session 5
+Route::get('cars', [CarController::class, 'index']);
+Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit');
+
+//Task5
+Route::get('classes', [CarController::class, 'index']);
+Route::get('classes/{id}', [CarController::class, 'edit'])->name('classes.edit');
