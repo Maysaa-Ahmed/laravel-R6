@@ -160,17 +160,34 @@ Route::post('task3data', function (Request $request) {
 
 
 
-Route::get('cars/create', [CarController::class, 'create']);
+Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
 Route::Post('cars', [CarController::class, 'store'])->name('cars.store');
 
 //classes task4
-Route::get('classes/create', [CarController::class, 'create']);
-Route::Post('classes', [CarController::class, 'store'])->name('classes.store');
+Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');
+Route::Post('classes', [ClassController::class, 'store'])->name('classes.store');
 
 //session 5
-Route::get('cars', [CarController::class, 'index']);
-Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit');
+Route::get('cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
 
 //Task5
-Route::get('classes', [CarController::class, 'index']);
-Route::get('classes/{id}', [CarController::class, 'edit'])->name('classes.edit');
+Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
+Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit');
+
+//session 6
+Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+Route::put('cars/{id}', [CarController::class, 'update'])->name('cars.update');
+Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+
+//for task6
+Route::get('classes/{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
+Route::put('classes/{id}', [ClassController::class, 'update'])->name('classes.update');
+//delete by get request
+// Route::get('classes/{id}/delete', [ClassController::class, 'destroy'])->name('classes.destroy');
+
+//delete by delete request
+Route::delete('classes/{id}', [ClassController::class, 'destroy'])->name('classes.destroy');
+
+Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');

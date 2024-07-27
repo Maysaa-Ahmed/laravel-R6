@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('price');
             $table->float('timeFrom');
             $table->float('timeTo');
+            $table->softDeletes();
         });
 
     }

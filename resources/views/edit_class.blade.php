@@ -24,8 +24,9 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Edit class</h2>
-        <form action="" method="POST" class="px-md-5">
+        <form action="{{route('classes.update', $class->id)}}" method="POST" class="px-md-5">
           @csrf
+          @method('PUT')
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Class Name:</label>
             <div class="col-md-10">
@@ -60,7 +61,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Is Fulled:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" @checked($class->isFulled) />
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="isFulled" @checked($class->isFulled) />
             </div>
           </div>
           <div class="text-md-end">

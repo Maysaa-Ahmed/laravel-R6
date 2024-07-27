@@ -47,7 +47,7 @@ class ClassController extends Controller
         ];
 
         Classes::create($data);
-        return "Done";
+        return redirect()->route('classes.index');
 
         // $className = 'BMW';
         // $capacity = 40;
@@ -73,7 +73,7 @@ class ClassController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -81,7 +81,7 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        $class = Classesr::findOrFail($id);
+        $class = Classes::findOrFail($id);
         return view('edit_class', compact('class'));
     }
 
@@ -90,7 +90,16 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = [
+            'className' => $request->className,
+            'capacity' => $request->capacity,
+            'price' => $request->price,
+            'timeFrom' => $request->timeFrom,
+            'timeTo' => $request->timeTo,
+            'isFulled' => isset( $request->isFulled),
+        ];
+        Classes::where('id',$id)->update($data);
+        return redirect()->route('classes.index');
     }
 
     /**
@@ -98,6 +107,15 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Classes::where('id', $id)->delete();
+       
+        return redirect()->route('classes.index');
+    }
+
+    public function showDeleted()
+    {
+        $classes = Classes::onlyTrashed()->get();
+       
+        return view('trachedClasses', compact('classes'));
     }
 }
