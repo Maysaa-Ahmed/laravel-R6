@@ -43,7 +43,13 @@
               <td>{{ \Illuminate\Support\Str::limit($car['description'], 20, '....') }}</td>
               <td>{{ $car['published'] ? 'Yes' : 'No' }}</td>
               <td><a href="{{ route('cars.edit', $car['id']) }}">Edit</a></td>
-              <td><a href="{{route('cars.destroy', $car['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
+              <td>
+                <form action="{{route('cars.destroy', $car->id)}}" method="POST">
+                  @csrf
+                  @method('delete')
+                <button type="submit" class="btn btn-link m-0 p-0">Delete</button>
+              </form>
+            </td>
             </tr>
             @endforeach
           </tbody>

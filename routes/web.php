@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ClassController;
 
 Route::get('', function () {
@@ -160,26 +161,26 @@ Route::post('task3data', function (Request $request) {
 
 
 
-Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
-Route::Post('cars', [CarController::class, 'store'])->name('cars.store');
+// Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
+// Route::Post('cars', [CarController::class, 'store'])->name('cars.store');
 
 //classes task4
 Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');
 Route::Post('classes', [ClassController::class, 'store'])->name('classes.store');
 
 //session 5
-Route::get('cars', [CarController::class, 'index'])->name('cars.index');
-Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+// Route::get('cars', [CarController::class, 'index'])->name('cars.index');
+// Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
 
 //Task5
 Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
 Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit');
 
 //session 6
-Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
-Route::put('cars/{id}', [CarController::class, 'update'])->name('cars.update');
-Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
-Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+// Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+// Route::put('cars/{id}', [CarController::class, 'update'])->name('cars.update');
+// Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+// Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
 
 //for task6
 Route::get('classes/{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
@@ -191,3 +192,22 @@ Route::put('classes/{id}', [ClassController::class, 'update'])->name('classes.up
 Route::delete('classes/{id}', [ClassController::class, 'destroy'])->name('classes.destroy');
 
 Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
+
+//session 7
+Route::prefix('cars')->group(function() {
+    Route::get('', [CarController::class, 'index'])->name('cars.index');
+    Route::get('create', [CarController::class, 'create'])->name('cars.create');
+    Route::post('', [CarController::class, 'store'])->name('cars.store');
+    Route::get('{car}/edit', [CarController::class, 'edit'])->name('cars.edit');
+    Route::put('{car}', [CarController::class, 'update'])->name('cars.update');
+    Route::delete('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+    Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+    Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
+    Route::delete('{id}', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
+}); 
+
+//session 8
+Route::get('uploadForm', [ExampleController::class, 'uploadForm'])->name('uploadForm');
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
+
+
