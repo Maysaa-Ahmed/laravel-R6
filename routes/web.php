@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ProductController;
 
 Route::get('', function () {
     return view('welcome');
@@ -210,4 +211,11 @@ Route::prefix('cars')->group(function() {
 Route::get('uploadForm', [ExampleController::class, 'uploadForm'])->name('uploadForm');
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 
+//session 9
+// Route::get('index', [ExampleController::class, 'index']);
+
+//Task 9 for products
+Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+Route::Post('products', [ProductController::class, 'store'])->name('products.store');
+Route::get('index', [ProductController::class, 'index']);
 

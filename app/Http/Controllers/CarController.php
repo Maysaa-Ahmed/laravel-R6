@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Car;
+use Illuminate\Http\Request;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use Common;
     public function index()
     {
         $cars = Car::get();
@@ -35,11 +35,11 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'published' => 'boolean'
         ]);
 
-
-        $data['published'] = isset($request->published);
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');
 
         Car::create($data);
         return redirect()->route('cars.index');
@@ -72,8 +72,14 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
             
         ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        }
+
         $data['published'] = isset( $request->published);
       
         Car::where('id',$id)->update($data);
@@ -105,18 +111,6 @@ class CarController extends Controller
     public function forceDelete(string $id) {
         Car::where('id', $id)->forceDelete();
         return redirect()->route('cars.index');
-    }
-
-    function uploadForm(){
-        return view('upload');
-    }
-
-    public function upload(Request $request){
-        $file_extension = $request->image->getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extension;
-        $path = 'images';
-        $request->image->move($path, $file_name);
-        return 'Uploaded';
     }
 
 }
