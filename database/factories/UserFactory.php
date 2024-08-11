@@ -11,6 +11,19 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+
+    protected $model = Product::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'remember_token' => Str::random(10),
+        ];
+    }
     /**
      * The current password being used by the factory.
      */
