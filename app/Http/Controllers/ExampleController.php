@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class ExampleController extends Controller
 {
@@ -20,6 +21,9 @@ class ExampleController extends Controller
     public function index() {
 
         return view('index');
+    }
+    public function test() {
+        dd(Student::find(1), Student::find(1)->phone);
     }
 }
 

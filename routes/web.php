@@ -6,6 +6,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactusController;
 
 Route::get('', function () {
     return view('welcome');
@@ -224,3 +225,10 @@ Route::get('products', [ProductController::class, 'index'])->name('products.inde
 Route::get('{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::put('{product}', [ProductController::class, 'update'])->name('products.update');
+
+
+//session 11
+Route::get('testOneToOne', [ExampleController::class, 'test']);
+
+//task12:
+Route::post('/contact', [ContactusController::class, 'submit'])->name('contactus');
